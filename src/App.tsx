@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Header } from "./components/Header";
 import { GlobalStyle } from "./styles/globol";
 
 const Title = styled.h1`
@@ -8,9 +9,9 @@ const Title = styled.h1`
 
 export function App() {
   return (
-    <div className="App">
-      <h1>alo</h1>
+    <>
+      <Header />
       <GlobalStyle />
-    </div>
+    </>
   );
 }
