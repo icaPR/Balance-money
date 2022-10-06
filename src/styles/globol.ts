@@ -3,11 +3,11 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 :root{
     --background: #161712;
-    --black: #161712;
-    --red: #F05D5E;
-    --green: #0F7173;
+    --black: #3772FF;
+    --red: #D7263D;
+    --green: #23CE6B;
 
-    --black-light: #703D57;
+    --black-light: #080708;
     
     --text-title:  #161712;
     --text-body: #8F9A84;
@@ -51,5 +51,42 @@ button {
 [display]{
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.react-modal-overlay{
+    background: rgba(0,0,0,0.5) ;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.react-modal-content{
+    width: 100%;
+    max-width: 576px;   
+    background: var(--background);
+    padding: 3rem;
+    position: relative;
+    border-radius:0.25rem;
+;
+}
+
+.react-modal-close{
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    border:0;
+    background: transparent;
+
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(0.7);
+    }
 }
 `;
