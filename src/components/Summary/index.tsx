@@ -1,30 +1,68 @@
 import icomeImg from "../../assets/Entradas.svg";
 import outomeImg from "../../assets/Saídas.svg";
 import totalImg from "../../assets/Total.svg";
-import { Container } from "./styles";
+import { TransactionContext } from "../../TransactionsContext";
+import { CardColor, Container } from "./styles";
+import { useContext } from "react";
+
 export function Summary() {
+  const { transactions } = useContext(TransactionContext);
+
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === "deposit") {
+        acc.deposits += transaction.amount;
+        acc.total += transaction.amount;
+      } else {
+        acc.withdraws += transaction.amount;
+        acc.total -= transaction.amount;
+      }
+      return acc;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      total: 0,
+    }
+  );
+
   return (
-    <Container>
+    <Container isActive={summary.total >= 0} activeColor="green">
       <div>
         <header>
           <p>Entradas</p>
           <img src={icomeImg} alt="Entradas" />
         </header>
-        <strong>R$500</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.deposits)}
+        </strong>
       </div>
       <div>
         <header>
-          <p>Saidas</p>
+          <p>Saídas</p>
           <img src={outomeImg} alt="Saidas" />
         </header>
-        <strong>R$400</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.withdraws)}
+        </strong>
       </div>
-      <div>
+      <div className="cardTotalColor">
         <header>
-          <p>Toral</p>
+          <p>Total</p>
           <img src={totalImg} alt="Total" />
         </header>
-        <strong>R$100</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.total)}
+        </strong>
       </div>
     </Container>
   );

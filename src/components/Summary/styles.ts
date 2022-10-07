@@ -1,6 +1,21 @@
+import { transparentize } from "polished";
 import styled from "styled-components";
 
-export const Container = styled.div`
+interface CardProps {
+  isActive: boolean;
+  activeColor: "green" | "red";
+}
+const colors = {
+  green: "#23CE6B",
+  red: "#D7263D",
+};
+
+export const Container = styled.div<CardProps>`
+  .cardTotalColor {
+    background: ${(props) =>
+      props.isActive ? colors[props.activeColor] : "#D7263D"};
+  }
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
@@ -25,4 +40,9 @@ export const Container = styled.div`
       line-height: 3rem;
     }
   }
+`;
+
+export const CardColor = styled.div<CardProps>`
+  background: ${(props) =>
+    props.isActive ? colors[props.activeColor] : "transparent"};
 `;
