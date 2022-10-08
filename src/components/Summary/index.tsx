@@ -1,12 +1,11 @@
 import icomeImg from "../../assets/Entradas.svg";
 import outomeImg from "../../assets/Saídas.svg";
 import totalImg from "../../assets/Total.svg";
-import { TransactionContext } from "../../TransactionsContext";
-import { CardColor, Container } from "./styles";
-import { useContext } from "react";
+import { Container } from "./styles";
+import { useTransactions } from "../../hooks/useTransactionsContext";
 
 export function Summary() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions } = useTransactions();
 
   const summary = transactions.reduce(
     (acc, transaction) => {
